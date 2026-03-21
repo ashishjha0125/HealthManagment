@@ -1,0 +1,130 @@
+/* Image Uploader Component Styles */
+.uploader {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.uploader__dropzone {
+  position: relative;
+  border: 2px dashed var(--border-color);
+  border-radius: var(--radius-xl);
+  padding: 3rem 2rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all var(--transition-speed) ease;
+  background: var(--gradient-card);
+  overflow: hidden;
+}
+
+.uploader__dropzone::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--gradient-primary);
+  opacity: 0;
+  transition: opacity var(--transition-speed) ease;
+  z-index: 0;
+}
+
+.uploader__dropzone:hover,
+.uploader__dropzone--active {
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 4px var(--accent-light);
+}
+
+.uploader__dropzone:hover::before,
+.uploader__dropzone--active::before {
+  opacity: 0.05;
+}
+
+.uploader__icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 1rem;
+  color: var(--accent-primary);
+  opacity: 0.7;
+  position: relative;
+  z-index: 1;
+}
+
+.uploader__text {
+  position: relative;
+  z-index: 1;
+}
+
+.uploader__title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.uploader__subtitle {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.uploader__browse {
+  color: var(--accent-primary);
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.uploader__preview {
+  margin-top: 1.5rem;
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.uploader__preview-img {
+  width: 100%;
+  max-height: 300px;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+}
+
+.uploader__preview-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 50%);
+  display: flex;
+  align-items: flex-end;
+  padding: 1rem;
+}
+
+.uploader__preview-name {
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.uploader__actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+  justify-content: center;
+}
+
+.uploader__analyzing {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 2rem;
+}
+
+.uploader__spinner {
+  width: 48px;
+  height: 48px;
+  border: 3px solid var(--border-color);
+  border-top-color: var(--accent-primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+.uploader__analyzing-text {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}

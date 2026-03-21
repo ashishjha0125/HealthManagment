@@ -1,0 +1,31 @@
+/* ============================================
+   App Layout Styles
+   ============================================ */
+
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: var(--bg-primary);
+}
+
+.app__layout {
+  display: flex;
+  flex: 1;
+  padding-top: var(--navbar-height);
+}
+
+.app__main {
+  flex: 1;
+  margin-left: var(--sidebar-width);
+  padding: 2rem;
+  min-height: calc(100vh - var(--navbar-height));
+  transition: margin-left var(--transition-speed) ease;
+}
+
+@media (max-width: 768px) {
+  .app__main {
+    margin-left: 0;
+    padding: 1rem;
+  }
+}

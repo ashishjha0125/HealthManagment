@@ -1,0 +1,38 @@
+/* History Page Styles */
+.page-history {
+  animation: fadeInUp 0.5s ease-out;
+}
+
+.page-history__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.page-history__title {
+  font-size: 1.5rem;
+}
+
+.page-history__filters {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.page-history__filter-btn {
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-full);
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  font-weight: 500;
+  border: 1px solid var(--border-color);
+  transition: all var(--transition-speed) ease;
+}
+
+.page-history__filter-btn--active,
+.page-history__filter-btn:hover {
+  background: var(--accent-light);
+  color: var(--accent-primary);
+  border-color: var(--accent-primary);
+}
