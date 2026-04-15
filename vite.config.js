@@ -17,4 +17,7 @@ export default defineConfig({
       '@styles': '/src/styles',
     },
   },
+  server: {
+    host: '0.0.0.0', // Allows network access
+  },
 });

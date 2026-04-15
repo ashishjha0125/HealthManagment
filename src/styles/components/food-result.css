@@ -1,0 +1,202 @@
+/* FoodResult Component Styles - Theme Adaptive */
+.food-result {
+  margin-top: 2rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 2rem;
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px) var(--glass-saturate);
+  -webkit-backdrop-filter: blur(20px) var(--glass-saturate);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-md);
+}
+
+.food-result__header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.food-result__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #fff;
+  width: fit-content;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.food-result__title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-heading);
+}
+
+.food-result__food-name {
+  margin-bottom: 1.75rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.food-result__label-text {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-weight: 600;
+}
+
+.food-result__name {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--text-heading);
+  margin-top: 0.25rem;
+  font-family: 'Space Grotesk', sans-serif;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Nutrition Grid */
+.food-result__nutrition-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.food-result__nutrient {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  border-radius: var(--radius-md);
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  transition: all var(--transition-speed) ease;
+}
+
+.food-result__nutrient:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.food-result__nutrient-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.food-result__nutrient--calories .food-result__nutrient-icon {
+  background: rgba(245, 158, 11, 0.12);
+  color: var(--color-calories);
+}
+
+.food-result__nutrient--protein .food-result__nutrient-icon {
+  background: rgba(239, 68, 68, 0.12);
+  color: var(--color-protein);
+}
+
+.food-result__nutrient--carbs .food-result__nutrient-icon {
+  background: rgba(59, 130, 246, 0.12);
+  color: var(--color-carbs);
+}
+
+.food-result__nutrient--fat .food-result__nutrient-icon {
+  background: rgba(139, 92, 246, 0.12);
+  color: var(--color-fat);
+}
+
+.food-result__nutrient-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.food-result__nutrient-value {
+  font-size: 1.2rem;
+  font-weight: 700;
+  font-family: 'Space Grotesk', sans-serif;
+  color: var(--text-heading);
+  line-height: 1.2;
+}
+
+.food-result__nutrient-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Serving Info */
+.food-result__serving {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+  padding: 0.75rem 1rem;
+  background: var(--bg-tertiary);
+  border-radius: var(--radius-sm);
+  border-left: 3px solid var(--accent-primary);
+}
+
+/* Confidence Section */
+.food-result__confidence-section {
+  margin-bottom: 1.5rem;
+}
+
+.food-result__confidence-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.food-result__confidence-bar {
+  height: 8px;
+  background: var(--bg-tertiary);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.food-result__confidence-fill {
+  height: 100%;
+  border-radius: var(--radius-full);
+  transition: width 1s ease-out;
+  box-shadow: 0 0 10px var(--accent-glow);
+}
+
+/* Add Button */
+.food-result__add-btn {
+  width: 100%;
+  justify-content: center;
+  padding: 0.9rem;
+  font-size: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .food-result__nutrition-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .food-result__name {
+    font-size: 1.4rem;
+  }
+
+  .food-result {
+    padding: 1.25rem;
+  }
+}

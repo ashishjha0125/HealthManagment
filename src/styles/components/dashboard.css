@@ -1,4 +1,4 @@
-/* Dashboard Component Styles */
+/* Dashboard Component Styles - Theme Adaptive */
 .dashboard-stats {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -10,13 +10,16 @@
   padding: 1.25rem;
   border-radius: var(--radius-lg);
   background: var(--glass-bg);
+  backdrop-filter: blur(20px) var(--glass-saturate);
+  -webkit-backdrop-filter: blur(20px) var(--glass-saturate);
   border: 1px solid var(--glass-border);
-  backdrop-filter: blur(10px);
-  transition: transform var(--transition-speed) ease;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
 }
 
 .stat-card:hover {
   transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
 }
 
 .stat-card__icon {
@@ -29,10 +32,10 @@
   margin-bottom: 0.75rem;
 }
 
-.stat-card__icon--calories { background: rgba(245, 158, 11, 0.15); color: var(--color-calories); }
-.stat-card__icon--protein { background: rgba(239, 68, 68, 0.15); color: var(--color-protein); }
-.stat-card__icon--carbs { background: rgba(59, 130, 246, 0.15); color: var(--color-carbs); }
-.stat-card__icon--fat { background: rgba(139, 92, 246, 0.15); color: var(--color-fat); }
+.stat-card__icon--calories { background: rgba(245, 158, 11, 0.12); color: var(--color-calories); }
+.stat-card__icon--protein { background: rgba(239, 68, 68, 0.12); color: var(--color-protein); }
+.stat-card__icon--carbs { background: rgba(59, 130, 246, 0.12); color: var(--color-carbs); }
+.stat-card__icon--fat { background: rgba(139, 92, 246, 0.12); color: var(--color-fat); }
 
 .stat-card__value {
   font-family: 'Space Grotesk', sans-serif;
@@ -78,9 +81,12 @@
 
 .chart-card {
   background: var(--glass-bg);
+  backdrop-filter: blur(20px) var(--glass-saturate);
+  -webkit-backdrop-filter: blur(20px) var(--glass-saturate);
   border: 1px solid var(--glass-border);
   border-radius: var(--radius-lg);
   padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
 }
 
 .chart-card__header {

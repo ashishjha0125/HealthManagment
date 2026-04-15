@@ -1,7 +1,9 @@
 /* ============================================
    NutriVision AI - Global Styles
+   iPhone Glassmorphism Edition
    ============================================ */
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
 @import './variables.css';
 
 /* Reset & Base */
@@ -19,13 +21,15 @@ html {
 }
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  background: var(--bg-primary);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
+  background: var(--gradient-bg);
+  background-attachment: fixed;
   color: var(--text-primary);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  min-height: 100vh;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -66,22 +70,22 @@ ul, ol {
   list-style: none;
 }
 
-/* Scrollbar Styling */
+/* Scrollbar Styling - iOS thin style */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--bg-secondary);
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--accent-primary);
-  border-radius: 4px;
+  background: rgba(124, 58, 237, 0.25);
+  border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--accent-hover);
+  background: rgba(124, 58, 237, 0.4);
 }
 
 /* Utility Classes */
@@ -109,21 +113,24 @@ ul, ol {
   border-radius: 2px;
 }
 
+/* iPhone Glass Card */
 .glass-card {
   background: var(--glass-bg);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
   border: 1px solid var(--glass-border);
   border-radius: var(--radius-lg);
   padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
   transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
 }
 
 .glass-card:hover {
   transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
+  box-shadow: var(--shadow-md);
 }
 
+/* Buttons */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -144,16 +151,19 @@ ul, ol {
 .btn--primary:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow-accent-lg);
+  filter: brightness(1.05);
 }
 
 .btn--secondary {
-  background: var(--bg-tertiary);
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   color: var(--text-primary);
   border: 1px solid var(--border-color);
 }
 
 .btn--secondary:hover {
-  background: var(--bg-secondary);
+  background: rgba(255, 255, 255, 0.7);
   border-color: var(--accent-primary);
 }
 
@@ -197,6 +207,11 @@ ul, ol {
 @keyframes spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
 }
 
 .animate-fadeInUp {

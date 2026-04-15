@@ -1,0 +1,19 @@
+/* Footer Component Styles - Responsive */
+.footer {
+  text-align: center;
+  padding: 1.5rem 2rem;
+  border-top: 1px solid var(--border-color);
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  margin-left: var(--sidebar-width);
+  background: var(--bg-primary);
+  transition: margin-left var(--transition-speed) ease;
+}
+
+@media (max-width: 768px) {
+  .footer {
+    margin-left: 0;
+    padding: 1.25rem 1rem;
+    font-size: 0.75rem;
+  }
+}

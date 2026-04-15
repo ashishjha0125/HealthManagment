@@ -1,78 +1,151 @@
 /* ============================================
    NutriVision AI - Design Tokens / CSS Variables
+   Apple iOS Style - Light & Dark Themes
    ============================================ */
 
-:root {
+:root,
+[data-theme="light"] {
   /* ── Layout ── */
   --navbar-height: 70px;
   --sidebar-width: 260px;
 
-  /* ── Colors - Dark Theme ── */
-  --bg-primary: #0a0e1a;
-  --bg-secondary: #111827;
-  --bg-tertiary: #1a2035;
-  --bg-elevated: #1e2a45;
+  /* ── Colors - Light Theme (iOS Light) ── */
+  --bg-primary: #f2f2f7;
+  --bg-secondary: rgba(255, 255, 255, 0.6);
+  --bg-tertiary: rgba(255, 255, 255, 0.45);
+  --bg-elevated: rgba(255, 255, 255, 0.7);
 
   /* ── Text ── */
-  --text-primary: #e2e8f0;
-  --text-secondary: #94a3b8;
-  --text-muted: #64748b;
-  --text-heading: #f1f5f9;
+  --text-primary: #1c1c1e;
+  --text-secondary: #636366;
+  --text-muted: #aeaeb2;
+  --text-heading: #000000;
 
-  /* ── Accent Colors ── */
-  --accent-primary: #6366f1;
-  --accent-hover: #818cf8;
-  --accent-light: rgba(99, 102, 241, 0.15);
-  --accent-glow: rgba(99, 102, 241, 0.3);
+  /* ── Accent Colors (Apple Blue) ── */
+  --accent-primary: #007AFF;
+  --accent-hover: #0A84FF;
+  --accent-light: rgba(0, 122, 255, 0.1);
+  --accent-glow: rgba(0, 122, 255, 0.2);
 
   /* ── Gradients ── */
-  --gradient-primary: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a78bfa 100%);
-  --gradient-success: linear-gradient(135deg, #10b981 0%, #34d399 100%);
-  --gradient-warning: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
-  --gradient-danger: linear-gradient(135deg, #ef4444 0%, #f87171 100%);
-  --gradient-card: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%);
-  --gradient-bg: radial-gradient(ellipse at top, #1a1f3a 0%, #0a0e1a 70%);
+  --gradient-primary: linear-gradient(135deg, #007AFF 0%, #5AC8FA 100%);
+  --gradient-success: linear-gradient(135deg, #34C759 0%, #30D158 100%);
+  --gradient-warning: linear-gradient(135deg, #FF9500 0%, #FFCC00 100%);
+  --gradient-danger: linear-gradient(135deg, #FF3B30 0%, #FF6961 100%);
+  --gradient-card: linear-gradient(135deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.25) 100%);
+  --gradient-bg: linear-gradient(160deg, #f2f2f7 0%, #e5e5ea 50%, #f2f2f7 100%);
 
-  /* ── Nutrition Colors ── */
-  --color-calories: #f59e0b;
-  --color-protein: #ef4444;
-  --color-carbs: #3b82f6;
-  --color-fat: #8b5cf6;
-  --color-fiber: #10b981;
-  --color-sugar: #ec4899;
+  /* ── Nutrition Colors (Apple System Colors) ── */
+  --color-calories: #FF9500;
+  --color-protein: #FF3B30;
+  --color-carbs: #007AFF;
+  --color-fat: #AF52DE;
+  --color-fiber: #34C759;
+  --color-sugar: #FF2D55;
 
   /* ── Status Colors ── */
-  --color-success: #10b981;
-  --color-warning: #f59e0b;
-  --color-danger: #ef4444;
-  --color-danger-hover: #dc2626;
-  --color-info: #3b82f6;
+  --color-success: #34C759;
+  --color-warning: #FF9500;
+  --color-danger: #FF3B30;
+  --color-danger-hover: #D70015;
+  --color-info: #007AFF;
 
-  /* ── Glass Effect ── */
-  --glass-bg: rgba(17, 24, 39, 0.7);
-  --glass-border: rgba(99, 102, 241, 0.15);
-  --glass-highlight: rgba(255, 255, 255, 0.05);
+  /* ── Glass Effect (iPhone-style) ── */
+  --glass-bg: rgba(255, 255, 255, 0.55);
+  --glass-border: rgba(255, 255, 255, 0.7);
+  --glass-highlight: rgba(255, 255, 255, 0.85);
+  --glass-blur: 24px;
+  --glass-saturate: saturate(180%);
 
   /* ── Borders ── */
-  --border-color: rgba(148, 163, 184, 0.1);
-  --border-active: rgba(99, 102, 241, 0.5);
+  --border-color: rgba(60, 60, 67, 0.12);
+  --border-active: rgba(0, 122, 255, 0.4);
 
-  /* ── Radius ── */
-  --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-lg: 16px;
-  --radius-xl: 24px;
+  /* ── Radius (iOS-like rounded) ── */
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
   --radius-full: 9999px;
 
   /* ── Shadows ── */
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
-  --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.5);
-  --shadow-accent: 0 4px 15px rgba(99, 102, 241, 0.25);
-  --shadow-accent-lg: 0 8px 25px rgba(99, 102, 241, 0.35);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.03);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.06), 0 2px 4px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.04);
+  --shadow-accent: 0 4px 20px rgba(0, 122, 255, 0.15);
+  --shadow-accent-lg: 0 8px 30px rgba(0, 122, 255, 0.2);
+
+  /* ── Chart Colors ── */
+  --chart-grid: rgba(60, 60, 67, 0.08);
+  --chart-tick: #636366;
+  --chart-tooltip-bg: rgba(255, 255, 255, 0.95);
+  --chart-tooltip-title: #000000;
+  --chart-tooltip-body: #1c1c1e;
+  --chart-tooltip-border: rgba(0, 122, 255, 0.2);
+  --chart-center-text: #000000;
+  --chart-legend: #636366;
 
   /* ── Transitions ── */
   --transition-speed: 0.3s;
   --transition-fast: 0.15s;
   --transition-slow: 0.5s;
+}
+
+/* ── DARK THEME (iOS Dark) ── */
+[data-theme="dark"] {
+  --bg-primary: #000000;
+  --bg-secondary: rgba(28, 28, 30, 0.75);
+  --bg-tertiary: rgba(44, 44, 46, 0.8);
+  --bg-elevated: rgba(44, 44, 46, 0.9);
+
+  --text-primary: #f2f2f7;
+  --text-secondary: #aeaeb2;
+  --text-muted: #636366;
+  --text-heading: #ffffff;
+
+  --accent-primary: #0A84FF;
+  --accent-hover: #409CFF;
+  --accent-light: rgba(10, 132, 255, 0.15);
+  --accent-glow: rgba(10, 132, 255, 0.3);
+
+  --gradient-primary: linear-gradient(135deg, #0A84FF 0%, #5AC8FA 100%);
+  --gradient-card: linear-gradient(135deg, rgba(10, 132, 255, 0.05) 0%, rgba(0, 122, 255, 0.03) 100%);
+  --gradient-bg: linear-gradient(160deg, #000000 0%, #1c1c1e 50%, #000000 100%);
+
+  --color-calories: #FF9F0A;
+  --color-protein: #FF453A;
+  --color-carbs: #0A84FF;
+  --color-fat: #BF5AF2;
+  --color-fiber: #30D158;
+  --color-sugar: #FF375F;
+
+  --color-success: #30D158;
+  --color-warning: #FF9F0A;
+  --color-danger: #FF453A;
+  --color-danger-hover: #FF6961;
+  --color-info: #0A84FF;
+
+  --glass-bg: rgba(28, 28, 30, 0.65);
+  --glass-border: rgba(10, 132, 255, 0.12);
+  --glass-highlight: rgba(255, 255, 255, 0.05);
+  --glass-blur: 24px;
+  --glass-saturate: saturate(120%);
+
+  --border-color: rgba(84, 84, 88, 0.25);
+  --border-active: rgba(10, 132, 255, 0.5);
+
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.35), 0 2px 4px rgba(0, 0, 0, 0.25);
+  --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.45), 0 4px 12px rgba(0, 0, 0, 0.3);
+  --shadow-accent: 0 4px 20px rgba(10, 132, 255, 0.2);
+  --shadow-accent-lg: 0 8px 30px rgba(10, 132, 255, 0.3);
+
+  --chart-grid: rgba(84, 84, 88, 0.1);
+  --chart-tick: #aeaeb2;
+  --chart-tooltip-bg: rgba(28, 28, 30, 0.95);
+  --chart-tooltip-title: #ffffff;
+  --chart-tooltip-body: #f2f2f7;
+  --chart-tooltip-border: rgba(10, 132, 255, 0.3);
+  --chart-center-text: #ffffff;
+  --chart-legend: #aeaeb2;
 }

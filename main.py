@@ -8,6 +8,14 @@ import json
 import io
 import os
 import sys
+from dotenv import load_dotenv
+from google import genai
+
+# Load environment variables (for Gemini API Key)
+load_dotenv()
+GEMINI_CLIENT = None
+if os.getenv("GEMINI_API_KEY"):
+    GEMINI_CLIENT = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
 
 app = FastAPI(title="NutriVision AI API")
 
@@ -29,8 +37,8 @@ def load_resources():
     required_files = [MODEL_PATH, CLASSES_PATH, NUTRITION_DB_PATH]
     for file in required_files:
         if not os.path.exists(file):
-            print(f"❌ CRITICAL ERROR: Missing file '{file}' in the directory.")
-            print(f"👉 Current Directory: {os.getcwd()}")
+            print(f"[ERROR] CRITICAL ERROR: Missing file '{file}' in the directory.")
+            print(f"[INFO] Current Directory: {os.getcwd()}")
             sys.exit(1) # Stop the server immediately if files are missing
 
     try:
@@ -53,14 +61,14 @@ def load_resources():
         
         return model, labels, nutrition_db
     except Exception as e:
-        print(f"❌ FAILED TO INITIALIZE AI: {e}")
+        print(f"[ERROR] FAILED TO INITIALIZE AI: {e}")
         sys.exit(1)
 
 # Initialize once when server starts
-print(f"🐍 System Check: Running on Python {sys.version.split()[0]}")
-print("⏳ Initializing NutriVision AI Brain...")
+print(f"[PYTHON] System Check: Running on Python {sys.version.split()[0]}")
+print("[LOADING] Initializing NutriVision AI Brain...")
 MODEL, LABELS, NUTRITION_DB = load_resources()
-print(f"✅ Server Ready! Loaded {len(LABELS)} food categories.")
+print(f"[READY] Server Ready! Loaded {len(LABELS)} food categories.")
 
 # --- 2. IMAGE TRANSFORMS ---
 preprocess = transforms.Compose([
@@ -101,7 +109,59 @@ async def predict_food(file: UploadFile = File(...)):
         food_name = LABELS[index]
         conf_score = float(confidence.item() * 100)
         
-        # Nutrition Lookup
+        # --- FALLBACK: If confidence is low, use Gemini AI ---
+        # If the local model is less than 60% confident AND Gemini API key is available
+        if conf_score < 60.0 and GEMINI_CLIENT:
+            try:
+                print(f"[INFO] Low confidence ({conf_score:.2f}%). Falling back to Gemini AI...")
+                prompt = """
+                You are a nutrition analyst. Look at this image. 
+                Identify the food item, estimate its visual quantity (e.g., '3 pieces', '1 full bowl', 'approx 200g'), and provide the estimated total nutritional value for THAT specific quantity shown in the image in JSON format.
+                Provide only a valid JSON output with the following keys exactly:
+                {
+                    "food_name": "Name of the food",
+                    "estimated_quantity": "Visual estimate of amount",
+                    "calories": 0,
+                    "protein": 0,
+                    "fat": 0,
+                    "carbs": 0
+                }
+                If it's not food, set 'food_name' to "Not recognized as food".
+                """
+                response = GEMINI_CLIENT.models.generate_content(
+                    model='gemini-2.5-flash',
+                    contents=[prompt, img]
+                )
+                response_text = response.text.strip()
+                
+                # Extract JSON from response if it is wrapped in markdown blocks
+                import re
+                json_match = re.search(r'```(?:json)?(.*?)```', response_text, re.DOTALL)
+                if json_match:
+                    response_text = json_match.group(1).strip()
+                
+                gemini_data = json.loads(response_text)
+                
+                return {
+                    "success": True,
+                    "prediction": {
+                        "label": gemini_data.get("food_name", "Unknown Food (Gemini)"),
+                        "confidence": 99.0,
+                        "source": "Gemini AI"
+                    },
+                    "nutrition": {
+                        "calories": gemini_data.get("calories", 0),
+                        "protein": gemini_data.get("protein", 0),
+                        "fat": gemini_data.get("fat", 0),
+                        "carbs": gemini_data.get("carbs", 0),
+                        "unit": gemini_data.get("estimated_quantity", "1 serving estimated")
+                    }
+                }
+            except Exception as e:
+                print(f"[WARNING] Gemini Fallback Failed: {e}. Returning local model result.")
+                # If Gemini fails, it will just fall through to the normal local model return below
+
+        # Normal Nutrition Lookup (Local Model)
         nutrition = NUTRITION_DB.get(food_name, {
             "calories": 0, "protein": 0, "fat": 0, "carbs": 0, "unit": "unknown"
         })
@@ -110,7 +170,8 @@ async def predict_food(file: UploadFile = File(...)):
             "success": True,
             "prediction": {
                 "label": food_name,
-                "confidence": round(conf_score, 2)
+                "confidence": round(conf_score, 2),
+                "source": "Local AI Model"
             },
             "nutrition": nutrition
         }
@@ -118,3 +179,4 @@ async def predict_food(file: UploadFile = File(...)):
         return {"success": False, "error": str(e)}
 
 # To run this: uvicorn main:app --reload
+#uvicorn main:app --reload --host 0.0.0.0

@@ -1,5 +1,6 @@
-// NotFound Page - 404 error page
+// NotFound Page - 404 error page with Lucide icons
 import { Link } from 'react-router-dom';
+import { UtensilsCrossed, Home } from 'lucide-react';
 
 const NotFound = () => {
   return (
@@ -15,7 +16,7 @@ const NotFound = () => {
         animation: 'fadeInUp 0.5s ease-out',
       }}
     >
-      <div style={{ fontSize: '6rem', marginBottom: '1rem' }}>🍽️</div>
+      <UtensilsCrossed size={80} style={{ marginBottom: '1rem', color: 'var(--text-muted)', opacity: 0.4 }} />
       <h1 style={{
         fontSize: '4rem',
         fontWeight: 800,
@@ -31,7 +32,8 @@ const NotFound = () => {
         Oops! This page doesn't exist on the menu.
       </p>
       <Link to="/" className="btn btn--primary">
-        🏠 Back to Dashboard
+        <Home size={16} />
+        Back to Dashboard
       </Link>
     </div>
   );

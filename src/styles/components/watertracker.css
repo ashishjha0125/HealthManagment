@@ -1,0 +1,228 @@
+/* Water Tracker Component Styles */
+.water-tracker {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  margin-top: 1.5rem;
+  margin-bottom: 2rem;
+  animation: fadeInUp 0.5s ease-out 0.1s both;
+}
+
+.water-tracker__info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.water-tracker__header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.water-tracker__title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-heading);
+}
+
+.water-tracker__status {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--accent-primary);
+  display: flex;
+  align-items: baseline;
+  gap: 0.25rem;
+}
+
+.water-tracker__goal {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.water-tracker__volume {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+  margin-bottom: 0.75rem;
+}
+
+/* Controls */
+.water-tracker__controls-wrap {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+.water-tracker__controls {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.water-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: bold;
+}
+
+.water-btn--add {
+  background: rgba(59, 130, 246, 0.15);
+  color: #3b82f6;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.water-btn--add:hover {
+  background: #3b82f6;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.water-btn--remove {
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+}
+
+.water-btn--remove:hover:not(:disabled) {
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
+.water-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Reminder UI */
+.water-tracker__reminder {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.water-reminder-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 0.8rem;
+  border-radius: var(--radius-full);
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.water-reminder-btn:hover {
+  background: var(--glass-bg);
+  color: var(--text-heading);
+}
+
+.water-reminder-btn.active {
+  background: rgba(59, 130, 246, 0.1);
+  color: #3b82f6;
+  border-color: rgba(59, 130, 246, 0.4);
+}
+
+.water-reminder-select {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  border-radius: var(--radius-md);
+  padding: 0.4rem 0.5rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+  outline: none;
+}
+.water-reminder-select:focus {
+  border-color: var(--accent-primary);
+}
+
+/* Visual Glass Graphic */
+.water-tracker__visual {
+  height: 140px;
+  width: 100px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.water-glass {
+  width: 70px;
+  height: 120px;
+  border: 4px solid var(--border-color); /* Thicker visible rim */
+  background: var(--bg-tertiary); /* Makes the glass background pop slightly against the card */
+  border-top: none;
+  border-radius: 0 0 16px 16px;
+  position: relative;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.03);
+  box-shadow: inset 0 0 20px rgba(59, 130, 246, 0.05);
+}
+
+/* The Water Fill */
+.water-fill {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: linear-gradient(180deg, #60a5fa 0%, #3b82f6 100%);
+  transition: height 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 10;
+}
+
+/* Creating the moving waves using pseudo-elements */
+.wave {
+  position: absolute;
+  top: -12px;
+  left: 0;
+  width: 200%;
+  height: 12px;
+  background-repeat: repeat-x;
+  background-size: 50% 100%;
+}
+
+.wave1 {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='12' viewBox='0 0 100 12'%3E%3Cpath d='M0 12V6c16.667 0 16.667-6 33.333-6 16.667 0 16.667 6 33.333 6 16.667 0 16.667-6 33.333-6V12H0z' fill='%2360a5fa'/%3E%3C/svg%3E");
+  animation: wave 3s linear infinite;
+  opacity: 0.8;
+  z-index: 12;
+}
+
+.wave2 {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='12' viewBox='0 0 100 12'%3E%3Cpath d='M0 12V6c16.667 0 16.667-6 33.333-6 16.667 0 16.667 6 33.333 6 16.667 0 16.667-6 33.333-6V12H0z' fill='%233b82f6'/%3E%3C/svg%3E");
+  animation: wave 4s linear infinite reverse;
+  opacity: 0.5;
+  top: -8px;
+  z-index: 11;
+}
+
+.paused {
+  animation-play-state: paused;
+}
+
+@keyframes wave {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@media (max-width: 640px) {
+  .water-tracker {
+    padding: 1.25rem;
+  }
+}

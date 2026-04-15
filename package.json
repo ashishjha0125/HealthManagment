@@ -6,14 +6,19 @@
   "description": "AI-based Health Management System - Upload food images, detect calories using TensorFlow.js, and track daily nutrition.",
   "scripts": {
     "dev": "vite",
+    "start": "concurrently --names \"FRONTEND,AI-SERVER\" --prefix-colors \"cyan,green\" \"vite\" \"uvicorn main:app --reload --host 0.0.0.0\"",
     "build": "vite build",
     "preview": "vite preview",
     "lint": "eslint ."
   },
   "dependencies": {
+    "@clerk/clerk-react": "^5.61.4",
+    "@clerk/themes": "^2.4.57",
+    "@supabase/supabase-js": "^2.103.0",
     "@tensorflow-models/mobilenet": "^2.1.1",
     "@tensorflow/tfjs": "^4.22.0",
     "chart.js": "^4.4.7",
+    "firebase": "^12.12.0",
     "lucide-react": "^0.468.0",
     "react": "^18.3.1",
     "react-chartjs-2": "^5.2.0",
@@ -27,6 +32,7 @@
     "@types/react": "^18.3.18",
     "@types/react-dom": "^18.3.5",
     "@vitejs/plugin-react": "^4.3.4",
+    "concurrently": "^9.2.1",
     "eslint": "^9.17.0",
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-refresh": "^0.4.16",

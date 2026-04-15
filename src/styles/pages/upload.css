@@ -1,4 +1,4 @@
-/* Upload Page Styles */
+/* Upload Page Styles - iPhone Glassmorphism */
 .page-upload {
   animation: fadeInUp 0.5s ease-out;
   max-width: 800px;
@@ -22,4 +22,114 @@
 .page-upload__subtitle {
   color: var(--text-secondary);
   font-size: 1rem;
+  max-width: 500px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Server Status */
+.page-upload__server-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+  padding: 0.4rem 1rem;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.page-upload__server-status--online {
+  background: rgba(16, 185, 129, 0.1);
+  color: var(--color-success);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.page-upload__server-status--offline {
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--color-danger);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.page-upload__server-status--checking {
+  background: rgba(245, 158, 11, 0.1);
+  color: var(--color-warning);
+  border: 1px solid rgba(245, 158, 11, 0.2);
+}
+
+.page-upload__retry-btn {
+  background: transparent;
+  color: inherit;
+  padding: 0.15rem;
+  display: flex;
+  align-items: center;
+  border-radius: 50%;
+  transition: all var(--transition-fast) ease;
+}
+
+.page-upload__retry-btn:hover {
+  background: rgba(239, 68, 68, 0.1);
+  transform: rotate(90deg);
+}
+
+.page-upload__status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-warning);
+  animation: pulse 1.2s ease infinite;
+}
+
+/* Error Block */
+.page-upload__error {
+  max-width: 600px;
+  margin: 1.5rem auto;
+  padding: 1.5rem;
+  background: rgba(239, 68, 68, 0.06);
+  border: 1px solid rgba(239, 68, 68, 0.15);
+  border-radius: var(--radius-lg);
+  text-align: center;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.page-upload__error-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-danger);
+  margin-bottom: 0.5rem;
+}
+
+.page-upload__error-msg {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.75rem;
+}
+
+.page-upload__error-help {
+  padding: 0.75rem 1rem;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: var(--radius-sm);
+  margin-top: 0.75rem;
+  text-align: left;
+}
+
+.page-upload__error-help p {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+.page-upload__error-help code {
+  display: block;
+  padding: 0.5rem 0.75rem;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: var(--radius-sm);
+  color: var(--accent-primary);
+  font-family: 'Fira Code', 'Consolas', monospace;
+  font-size: 0.85rem;
+  border: 1px solid rgba(148, 163, 184, 0.15);
 }
