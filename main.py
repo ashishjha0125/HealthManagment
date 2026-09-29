@@ -8,6 +8,7 @@ import json
 import io
 import os
 import sys
+import time
 from dotenv import load_dotenv
 from google import genai
 
@@ -16,6 +17,13 @@ load_dotenv()
 GEMINI_CLIENT = None
 if os.getenv("GEMINI_API_KEY"):
     GEMINI_CLIENT = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
+
+# Fallback models if primary model is overloaded
+GEMINI_MODELS = [
+    'gemini-2.5-flash',
+    'gemini-2.0-flash',
+    'gemini-flash-latest'
+]
 
 app = FastAPI(title="NutriVision AI API")
 
@@ -128,38 +136,68 @@ async def predict_food(file: UploadFile = File(...)):
                 }
                 If it's not food, set 'food_name' to "Not recognized as food".
                 """
-                response = GEMINI_CLIENT.models.generate_content(
-                    model='gemini-2.5-flash',
-                    contents=[prompt, img]
-                )
-                response_text = response.text.strip()
                 
-                # Extract JSON from response if it is wrapped in markdown blocks
-                import re
-                json_match = re.search(r'```(?:json)?(.*?)```', response_text, re.DOTALL)
-                if json_match:
-                    response_text = json_match.group(1).strip()
+                # Try multiple models with retry logic
+                gemini_data = None
+                last_error = None
                 
-                gemini_data = json.loads(response_text)
+                for model_name in GEMINI_MODELS:
+                    try:
+                        print(f"[GEMINI] Attempting with model: {model_name}")
+                        for attempt in range(2):  # 2 attempts per model
+                            try:
+                                response = GEMINI_CLIENT.models.generate_content(
+                                    model=model_name,
+                                    contents=[prompt, img]
+                                )
+                                response_text = response.text.strip()
+                                
+                                # Extract JSON from response if it is wrapped in markdown blocks
+                                import re
+                                json_match = re.search(r'```(?:json)?(.*?)```', response_text, re.DOTALL)
+                                if json_match:
+                                    response_text = json_match.group(1).strip()
+                                
+                                gemini_data = json.loads(response_text)
+                                print(f"[SUCCESS] Got response from {model_name}")
+                                break  # Success, exit retry loop
+                            except Exception as attempt_error:
+                                last_error = attempt_error
+                                if attempt == 0:  # First attempt failed, wait before retry
+                                    print(f"[RETRY] Attempt {attempt + 1} failed, retrying in 2 seconds...")
+                                    time.sleep(2)
+                                else:
+                                    print(f"[FAIL] Model {model_name} failed: {type(attempt_error).__name__}")
+                        
+                        if gemini_data:
+                            break  # Got data from this model, exit model loop
+                            
+                    except Exception as e:
+                        print(f"[ERROR] Model {model_name} error: {e}")
+                        last_error = e
+                        continue
                 
-                return {
-                    "success": True,
-                    "prediction": {
-                        "label": gemini_data.get("food_name", "Unknown Food (Gemini)"),
-                        "confidence": 99.0,
-                        "source": "Gemini AI"
-                    },
-                    "nutrition": {
-                        "calories": gemini_data.get("calories", 0),
-                        "protein": gemini_data.get("protein", 0),
-                        "fat": gemini_data.get("fat", 0),
-                        "carbs": gemini_data.get("carbs", 0),
-                        "unit": gemini_data.get("estimated_quantity", "1 serving estimated")
+                if gemini_data:
+                    return {
+                        "success": True,
+                        "prediction": {
+                            "label": gemini_data.get("food_name", "Unknown Food (Gemini)"),
+                            "confidence": 99.0,
+                            "source": "Gemini AI"
+                        },
+                        "nutrition": {
+                            "calories": gemini_data.get("calories", 0),
+                            "protein": gemini_data.get("protein", 0),
+                            "fat": gemini_data.get("fat", 0),
+                            "carbs": gemini_data.get("carbs", 0),
+                            "unit": gemini_data.get("estimated_quantity", "1 serving estimated")
+                        }
                     }
-                }
+                else:
+                    print(f"[WARNING] All Gemini models failed. Last error: {last_error}. Using local model result.")
+                    
             except Exception as e:
                 print(f"[WARNING] Gemini Fallback Failed: {e}. Returning local model result.")
-                # If Gemini fails, it will just fall through to the normal local model return below
 
         # Normal Nutrition Lookup (Local Model)
         nutrition = NUTRITION_DB.get(food_name, {
