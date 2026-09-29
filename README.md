@@ -1,154 +1,101 @@
-# 🧠 NutriVision AI - Smart Health Management System
+<div align="center">
+  <h1>🍏 NutriVision AI</h1>
+  <p><em>Your Personal AI-Powered Nutrition & Health Manager</em></p>
+</div>
 
-> AI-powered food recognition and calorie tracking system built with React & TensorFlow.js
+![Dashboard](./screenshots/dashboard.png)
 
-![React](https://img.shields.io/badge/React-18.3-61DAFB?style=flat-square&logo=react)
-![TensorFlow.js](https://img.shields.io/badge/TensorFlow.js-4.22-FF6F00?style=flat-square&logo=tensorflow)
-![Vite](https://img.shields.io/badge/Vite-6.0-646CFF?style=flat-square&logo=vite)
+## 📖 Overview
 
----
+**NutriVision AI** is an intelligent health and nutrition tracking application that revolutionizes how you log your meals. Instead of manually searching for foods and estimating portion sizes, simply snap a picture! Our advanced AI instantly analyzes the image, detects the food items, and estimates the precise nutritional breakdown (Calories, Protein, Carbs, and Fat). 
 
-## ✨ Features
-
-- 📸 **Food Image Upload** - Drag & drop or click to upload food photos
-- 🤖 **AI Food Recognition** - TensorFlow.js MobileNet model identifies food items
-- 🔥 **Calorie Estimation** - Automatic calorie & macro breakdown for detected foods
-- 📊 **Daily Tracking** - Track calories, protein, carbs, and fat intake
-- 📈 **Visual Dashboard** - Charts and graphs for nutrition trends
-- 📋 **Food History** - Complete log of all scanned meals with date filtering
-- 💾 **Local Storage** - All data persists locally on your device
-- 🎯 **Goal Setting** - Set custom daily calorie and macro targets
-- 🌙 **Dark Theme** - Beautiful dark UI with glassmorphism effects
+With a sleek, modern dashboard, personalized health targets, and historical trend tracking, NutriVision AI makes achieving your fitness and dietary goals effortless and engaging.
 
 ---
 
-## 🛠️ Tech Stack
+## ✨ Key Features
 
-| Technology | Purpose |
-|---|---|
-| **React 18** | UI Framework |
-| **Vite** | Build Tool & Dev Server |
-| **TensorFlow.js** | AI/ML in the browser |
-| **MobileNet v2** | Pre-trained image classification model |
-| **Chart.js** | Data visualization |
-| **React Router** | Client-side routing |
-| **LocalStorage** | Data persistence |
-| **react-dropzone** | File upload handling |
-| **react-hot-toast** | Toast notifications |
-| **Lucide React** | Icon library |
+* **📸 AI-Powered Food Scanning:** Upload or snap a picture of your meal. The backend AI (powered by Google Gemini Vision) automatically identifies the food and provides a detailed nutritional breakdown.
+* **📊 Comprehensive Dashboard:** Get a bird's-eye view of your daily progress. Track Calories, Protein, Carbs, and Fats against your customized daily goals.
+* **💧 Hydration Tracker:** Stay on top of your daily water intake with quick-add buttons and a visual tracking interface.
+* **📈 Historical Trends & Analytics:** Visualize your daily macro splits with beautiful pie charts and track your calorie intake over time with interactive line charts.
+* **🎯 Personalized Goals:** Customize your daily macronutrient targets using our intuitive rotation wheels.
+* **🔐 Secure Authentication:** Seamless user login and secure profile management.
 
 ---
 
-## 📁 Project Structure
+## 💻 Tech Stack
 
-```
-Health Management/
-├── public/                      # Static assets
-│   └── vite.svg                 # Favicon
-├── src/
-│   ├── assets/                  # Images & icons
-│   │   ├── images/
-│   │   └── icons/
-│   ├── components/              # Reusable UI components
-│   │   ├── common/              # Shared components
-│   │   │   ├── Navbar.jsx       # Top navigation bar
-│   │   │   ├── Sidebar.jsx      # Side navigation
-│   │   │   ├── Footer.jsx       # Footer
-│   │   │   └── Loader.jsx       # Loading spinner
-│   │   ├── dashboard/           # Dashboard components
-│   │   │   ├── CalorieChart.jsx  # Weekly calorie chart
-│   │   │   ├── DailySummary.jsx  # Nutrition stat cards
-│   │   │   ├── RecentMeals.jsx   # Recent meals list
-│   │   │   └── NutritionOverview.jsx # Macro pie chart
-│   │   ├── food/                # Food scanning components
-│   │   │   ├── ImageUploader.jsx # Drag & drop uploader
-│   │   │   ├── FoodResult.jsx    # AI detection result
-│   │   │   ├── FoodHistory.jsx   # Meal history list
-│   │   │   └── CalorieDisplay.jsx # Calorie gauge
-│   │   └── profile/             # Profile components
-│   │       ├── UserProfile.jsx   # User info form
-│   │       └── GoalSettings.jsx  # Nutrition goals
-│   ├── pages/                   # Page components
-│   │   ├── Dashboard.jsx        # Main overview page
-│   │   ├── Upload.jsx           # Food scanning page
-│   │   ├── History.jsx          # Meal history page
-│   │   ├── Profile.jsx          # User profile page
-│   │   └── NotFound.jsx         # 404 page
-│   ├── hooks/                   # Custom React hooks
-│   │   ├── useImageClassifier.js # TF model hook
-│   │   ├── useCalorieTracker.js  # Calorie tracking hook
-│   │   └── useLocalStorage.js    # LocalStorage hook
-│   ├── services/                # Business logic services
-│   │   ├── tensorflowService.js  # TF.js model loading/inference
-│   │   ├── calorieService.js     # Food → nutrition mapping
-│   │   └── storageService.js     # LocalStorage operations
-│   ├── context/                 # React Context providers
-│   │   ├── MealContext.jsx       # Global meal state
-│   │   └── UserContext.jsx       # Global user state
-│   ├── utils/                   # Utilities & data
-│   │   ├── constants.js          # App-wide constants
-│   │   ├── helpers.js            # Helper functions
-│   │   └── foodDatabase.js       # Food nutrition database
-│   ├── styles/                  # CSS stylesheets
-│   │   ├── index.css             # Global styles & reset
-│   │   ├── variables.css         # Design tokens / CSS vars
-│   │   ├── components/           # Component-specific CSS
-│   │   └── pages/                # Page-specific CSS
-│   ├── App.jsx                  # Root component with routing
-│   ├── App.css                  # App layout styles
-│   └── main.jsx                 # Entry point
-├── package.json                 # Dependencies & scripts
-├── vite.config.js               # Vite configuration
-├── .env.example                 # Environment variables template
-├── .gitignore                   # Git ignore rules
-└── README.md                    # This file
-```
+* **Frontend:** React.js (Vite), React Router, Chart.js (react-chartjs-2), Lucide Icons
+* **Backend:** Python, FastAPI, Uvicorn
+* **AI & Machine Learning:** Google Gemini AI / PyTorch for deep image analysis & nutritional estimation.
+* **Database & Auth:** Clerk (Authentication), Supabase / Firebase
 
 ---
 
 ## 🚀 Getting Started
 
 ### Prerequisites
-- **Node.js** >= 18
-- **npm** >= 9
+* Node.js (v18+)
+* Python (3.10+)
 
-### Installation
+### Installation & Setup
 
-```bash
-# 1. Install dependencies
-npm install
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/ashishjha0125/HealthManagment.git
+   cd HealthManagment
+   ```
 
-# 2. Copy environment variables
-cp .env.example .env
+2. **Backend Setup:**
+   ```bash
+   # Create a virtual environment (optional but recommended)
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
 
-# 3. Start development server
-npm run dev
-```
+   # Install Python dependencies
+   pip install -r requirements.txt
+   
+   # Set up environment variables
+   # Copy .env.example to .env and add your GEMINI_API_KEY
+   ```
 
-### Build for Production
+3. **Frontend Setup:**
+   ```bash
+   # Install NPM packages
+   npm install
+   ```
 
-```bash
-npm run build
-npm run preview
-```
+4. **Run the Application:**
+   ```bash
+   # Start both frontend (Vite) and backend (FastAPI) concurrently
+   npm start
+   ```
+
+   * The Frontend will run on `http://localhost:5173`
+   * The Backend API will run on `http://localhost:8000`
 
 ---
 
-## 🔮 How It Works
+## 📸 Screenshots
 
-1. **Upload** → User uploads/drops a food image
-2. **AI Detect** → TensorFlow.js MobileNet model classifies the food
-3. **Lookup** → Food name is matched against the nutrition database
-4. **Display** → Calories & macros are shown to the user
-5. **Track** → Meal is saved to localStorage with timestamp
-6. **Visualize** → Dashboard shows daily/weekly nutrition trends
+### AI Food Scanning
+![Scan Food](./screenshots/scan_food.png)
+*Simply drop an image or use your camera to instantly analyze your meal's nutritional value.*
+
+### Detailed History & Analytics
+![History](./screenshots/history.png)
+![Calorie Trend](./screenshots/calorie_trend.png)
+*Track your macros with intuitive pie charts and visualize your progress over time with trend lines.*
+
+### Personalized Profile Settings
+![Profile](./screenshots/profile.png)
+*Adjust your daily targets with our interactive rotation wheels.*
 
 ---
 
-## 📝 License
-
-This project is for educational purposes.
+## 🤝 Contributing
+Contributions are welcome! Feel free to open issues or submit pull requests to help improve NutriVision AI.
 
 ---
-
-Built with ❤️ using React & TensorFlow.js
+⭐ **If you find this project useful, please consider giving it a star on GitHub!**
